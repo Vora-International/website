@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none">
-  <g transform="translate(0, 8)">
-    <circle cx="24" cy="24" r="22" fill="#145C43" />
-    <path d="M24 8 C18 16 14 22 14 27 A10 10 0 0 0 34 27 C34 22 30 16 24 8 Z" fill="#22B573" />
-    <path d="M24 14 C20 20 17 24 17 27 A7 7 0 0 0 31 27 C31 24 28 20 24 14 Z" fill="#FFFFFF" />
-  </g>
-  <text x="60" y="32" font-family="'Playfair Display', 'Instrument Serif', Georgia, serif" font-size="24" font-weight="600" fill="#FFFFFF" letter-spacing="1">VORA</text>
-  <text x="60" y="48" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#E3E1D9" letter-spacing="2.5">INTERNATIONAL</text>
-</svg>
