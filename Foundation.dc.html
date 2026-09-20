@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FFFFFF; font-family: Outfit, 'Helvetica Neue', Arial, sans-serif; color: #1F2933; -webkit-font-smoothing: antialiased; }
+  a { color: #0E6B42; text-decoration: none; }
+  a:hover { color: #0A5533; }
+  [data-w="d"] { display: none; } [data-w="m"] { display: flex; }
+  @media (min-width: 900px) { [data-w="d"] { display: flex; } [data-w="m"] { display: none; } }
+</style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; width: 100%; overflow-x: hidden">
+
+  <header data-header style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; transform: translateY(-130%); opacity: 0; transition: transform 320ms cubic-bezier(.4,0,.2,1), opacity 240ms ease-out; will-change: transform">
+    <div style="max-width: 1240px; margin: 0 auto; padding: clamp(14px, 2vw, 22px) clamp(14px, 4vw, 48px)">
+      <div style="background: rgba(255,255,255,0.9); backdrop-filter: saturate(180%) blur(14px); border: 1px solid rgba(31,41,51,0.07); box-shadow: 0 6px 22px rgba(31,41,51,0.06); border-radius: 999px; padding: 9px 9px 9px clamp(16px, 2vw, 24px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
+        <a href="Home.dc.html" style="display: flex; align-items: center; gap: 11px; color: #1F2933; flex: none">
+          <span style="width: 11px; height: 11px; border-radius: 50%; background: #22B573; display: block; flex: none"></span>
+          <span style="font-weight: 900; font-size: 21px; letter-spacing: 0.22em; color: #1F2933">VORA</span>
+        </a>
+        <nav data-w="d" style="align-items: center; gap: 2px; min-width: 0">
+          <a href="About.dc.html" style="font-size: 15.5px; font-weight: 600; color: #1F2933; padding: 9px 14px; border-radius: 999px; white-space: nowrap" style-hover="background: #F1F4F3; color: #0E6B42">About</a>
+          <a href="Products.dc.html" style="font-size: 15.5px; font-weight: 600; color: #1F2933; padding: 9px 14px; border-radius: 999px; white-space: nowrap" style-hover="background: #F1F4F3; color: #0E6B42">Products</a>
+          <a href="Foundation.dc.html" style="font-size: 15.5px; font-weight: 600; color: #1F2933; padding: 9px 14px; border-radius: 999px; white-space: nowrap" style-hover="background: #F1F4F3; color: #0E6B42">Foundation</a>
+        </nav>
+        <a data-w="d" href="Contact.dc.html" style="background: #0E6B42; color: #FFFFFF; font-weight: 600; font-size: 15.5px; padding: 12px 22px; border-radius: 999px; white-space: nowrap; flex: none; align-items: center" style-hover="background: #0A5533; color: #FFFFFF">Contact</a>
+        <button data-w="m" type="button" onClick="{{ openMenu }}" aria-label="Open menu" style="background: #FFFFFF; border: 1px solid #E5EAE8; border-radius: 999px; width: 44px; height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; flex: none; padding: 0">
+          <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+          <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+          <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div style="position: absolute; top: clamp(16px, 2.4vw, 26px); left: 0; right: 0; z-index: 30; padding: 0 clamp(16px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 16px; pointer-events: none">
+    <a href="Home.dc.html" style="display: flex; align-items: center; gap: 11px; color: #FFFFFF; pointer-events: auto">
+      <span style="width: 11px; height: 11px; border-radius: 50%; background: #22B573; display: block; flex: none"></span>
+      <span style="font-weight: 800; font-size: 21px; letter-spacing: 0.22em; color: #FFFFFF; text-shadow: 0 1px 14px rgba(14,21,18,0.55)">VORA</span>
+    </a>
+    <button data-herobtn type="button" onClick="{{ openMenu }}" aria-label="Open menu" style="pointer-events: auto; background: rgba(255,255,255,0.92); border: 0; border-radius: 999px; width: 46px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; flex: none; padding: 0" style-hover="background: #FFFFFF">
+      <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+      <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+      <span style="width: 17px; height: 2px; border-radius: 1px; background: #1F2933; display: block"></span>
+    </button>
+  </div>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 60; background: #FFFFFF; display: flex; flex-direction: column; padding: clamp(18px, 4vw, 28px) clamp(20px, 5vw, 40px) clamp(28px, 5vw, 44px)">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+        <span style="font-weight: 900; font-size: 21px; letter-spacing: 0.22em; color: #1F2933">VORA</span>
+        <button type="button" onClick="{{ closeMenu }}" aria-label="Close menu" style="background: #FFFFFF; border: 1px solid #E5EAE8; border-radius: 999px; width: 44px; height: 44px; cursor: pointer; font-family: Outfit, 'Helvetica Neue', Arial, sans-serif; font-size: 22px; color: #1F2933; padding: 0">×</button>
+      </div>
+      <nav style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2px">
+        <a href="About.dc.html" onClick="{{ closeMenu }}" style="font-weight: 800; font-size: clamp(26px, 7vw, 34px); color: #1F2933; padding: clamp(12px, 2.4vw, 16px) 0; border-bottom: 1px solid #EDF1EF">About</a>
+        <a href="Products.dc.html" onClick="{{ closeMenu }}" style="font-weight: 800; font-size: clamp(26px, 7vw, 34px); color: #1F2933; padding: clamp(12px, 2.4vw, 16px) 0; border-bottom: 1px solid #EDF1EF">Products</a>
+        <a href="Foundation.dc.html" onClick="{{ closeMenu }}" style="font-weight: 800; font-size: clamp(26px, 7vw, 34px); color: #1F2933; padding: clamp(12px, 2.4vw, 16px) 0">Foundation</a>
+      </nav>
+      <a href="Contact.dc.html" onClick="{{ closeMenu }}" style="background: #0E6B42; color: #FFFFFF; font-weight: 600; font-size: 17px; padding: 17px 28px; border-radius: 999px; display: block; text-align: center" style-hover="background: #0A5533; color: #FFFFFF">Contact us</a>
+    </div>
+  </sc-if>
+
+  <section style="position: relative; min-height: min(96vh, 900px); display: flex; overflow: hidden; background: #0D1411">
+    <img src="https://images.unsplash.com/photo-1688565633363-f8dcf47737eb?auto=format&fit=crop&w=2000&q=80" alt="A child's hands washed with soap at a communal water point" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,20,17,0.46) 0%, rgba(13,20,17,0.06) 32%, rgba(13,20,17,0.58) 72%, rgba(13,20,17,0.88) 100%)"></div>
+    <div style="position: relative; width: 100%; max-width: 1240px; margin: 0 auto; padding: clamp(150px, 24vh, 260px) clamp(20px, 4vw, 48px) clamp(56px, 8vh, 92px); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: clamp(22px, 2.6vw, 34px); text-align: center">
+      <h1 style="margin: 0; font-weight: 800; font-size: clamp(40px, 6.6vw, 96px); line-height: 0.97; letter-spacing: -0.042em; color: #FFFFFF; max-width: 18ch; text-wrap: balance; margin-left: auto; margin-right: auto">Clean habits, carried home by a generation.</h1>
+      <p style="margin: 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: #D7E1DC; max-width: 46ch; margin-left: auto; margin-right: auto">Teaching clean water, safe sanitation and everyday hygiene in Kenyan schools.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center"><a href="#support" style="background: #FFFFFF; color: #0D1411; font-weight: 600; font-size: 17px; padding: 17px 30px; border-radius: 999px; display: block" style-hover="background: #D9F2E5; color: #0D1411">Support our work</a><a href="#programmes" style="border: 1px solid rgba(255,255,255,0.5); color: #FFFFFF; font-weight: 600; font-size: 17px; padding: 16px 29px; border-radius: 999px; display: block" style-hover="background: rgba(255,255,255,0.15); color: #FFFFFF">See the programmes</a></div>
+    </div>
+  </section>
+
+  <section style="background: #FFFDFB; padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(36px, 5vw, 60px)">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(28px, 4vw, 64px); align-items: start">
+        <h2 style="margin: 0; font-weight: 800; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.03em; color: #1F2933; max-width: 15ch">Learning today for healthier communities tomorrow.</h2>
+        <p style="margin: 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; color: #5B6670; max-width: 52ch">A tap without a habit is a tap that stops being used. The Foundation works alongside Vora International so that every facility installed is understood, maintained and kept in daily use by the people it was built for.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px">
+        <div style="background: #FFF1E6; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -0.035em; color: #1F2933">4</span>
+          <span style="font-weight: 700; font-size: 17px; line-height: 1.35; color: #1F2933">programme areas</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #5B6670">Hygiene, safe water, sanitation and menstrual health.</span>
+        </div>
+        <div style="background: #FFFDF4; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -0.035em; color: #1F2933">Girls first</span>
+          <span style="font-weight: 700; font-size: 17px; line-height: 1.35; color: #1F2933">where it matters most</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #5B6670">Menstrual health taught with privacy, dignity and consent.</span>
+        </div>
+        <div style="background: #FFF1E6; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -0.035em; color: #1F2933">Rural focus</span>
+          <span style="font-weight: 700; font-size: 17px; line-height: 1.35; color: #1F2933">schools furthest from services</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #5B6670">Where facilities and teaching reach last and leave first.</span>
+        </div>
+        <div style="background: #FFFDF4; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(34px, 3.6vw, 48px); line-height: 1; letter-spacing: -0.035em; color: #1F2933">Teacher led</span>
+          <span style="font-weight: 700; font-size: 17px; line-height: 1.35; color: #1F2933">after we leave</span>
+          <span style="font-size: 15px; line-height: 1.5; color: #5B6670">Training so schools carry the programme themselves.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programmes" style="background: #FFFFFF; padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(34px, 5vw, 52px)">
+      <h2 style="margin: 0; font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.1; letter-spacing: -0.025em; color: #1F2933">Programmes</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(226px, 1fr)); gap: clamp(16px, 2vw, 28px)">
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div style="width: 100%; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; display: flex; background: #EEF2F1; box-shadow: 0 2px 6px rgba(18,48,36,0.06), 0 28px 54px -24px rgba(18,48,36,0.38)">
+            <img decoding="async" src="https://images.unsplash.com/photo-1559079236-2e64f89c7764?auto=format&fit=crop&w=1400&q=78" alt="Hands washed with soap under clean running water" style="width: 100%; height: 100%; object-fit: cover; display: block">
+          </div>
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">Hygiene in daily practice</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670">Practical sessions that turn handwashing, clean water and safe food handling into everyday habit.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div style="width: 100%; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; display: flex; background: #EEF2F1; box-shadow: 0 2px 6px rgba(18,48,36,0.06), 0 28px 54px -24px rgba(18,48,36,0.38)">
+            <img decoding="async" src="https://images.unsplash.com/photo-1596290618848-fcda233549e3?auto=format&fit=crop&w=1400&q=78" alt="Water running over hands at a clean basin" style="width: 100%; height: 100%; object-fit: cover; display: block">
+          </div>
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">Safe water and sanitation</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670">How to keep water safe from source to cup, and how to care for the toilets a school already has.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div style="width: 100%; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; display: flex; background: #EEF2F1; box-shadow: 0 2px 6px rgba(18,48,36,0.06), 0 28px 54px -24px rgba(18,48,36,0.38)">
+            <img decoding="async" src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1400&q=78" alt="Children placing their hands together in a circle" style="width: 100%; height: 100%; object-fit: cover; display: block">
+          </div>
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">Menstrual health and dignity</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670">Taught with privacy and consent, so no girl misses a day of school for a reason we can solve.</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px; border-top: 1px solid #E5EAE8; padding-top: clamp(28px, 4vw, 40px)">
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px; color: #1F2933">School hygiene clubs</span><span style="font-size: 16px; line-height: 1.6; color: #5B6670">Pupil-led groups that keep the habit alive between our visits.</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px; color: #1F2933">Teacher training</span><span style="font-size: 16px; line-height: 1.6; color: #5B6670">So the programme continues without us in the room.</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px; color: #1F2933">Community sessions</span><span style="font-size: 16px; line-height: 1.6; color: #5B6670">Because what children learn at school has to hold at home.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #123024; padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(34px, 5vw, 52px)">
+      <h2 style="margin: 0; font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.1; letter-spacing: -0.03em; color: #FFFFFF; max-width: 20ch">One installs it. One teaches it. Together it lasts.</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+        <div style="background: rgba(255,255,255,0.07); border-radius: 26px; padding: 32px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 20px; color: #7FE3B0">Vora International installs</span><span style="font-size: 16px; line-height: 1.6; color: #D6E7DE">Certified facilities, commissioned and kept in service.</span></div>
+        <div style="background: rgba(255,255,255,0.07); border-radius: 26px; padding: 32px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 20px; color: #FFB273">Vora Foundation teaches</span><span style="font-size: 16px; line-height: 1.6; color: #D6E7DE">Pupils and staff learn to use them and look after them.</span></div>
+        <div style="background: #FFFFFF; border-radius: 26px; padding: 32px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 20px; color: #123024">Schools stay healthy</span><span style="font-size: 16px; line-height: 1.6; color: #4B5563">Fewer sick days, and habits that outlast the project.</span></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 28px">
+        <span style="font-size: 17px; line-height: 1.6; color: #D6E7DE; max-width: 60ch">A share of revenue from Vora International funds the Foundation. The percentage is set by the board and published once agreed.</span>
+        <a href="Foundation.dc.html#support" style="background: #FF7A1A; color: #1B140F; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 10px; display: block" style-hover="background: #FFFFFF; color: #1B140F">Support the Foundation</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="support"></div>
+  <section style="padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(34px, 5vw, 52px)">
+      <h2 style="margin: 0; font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.1; letter-spacing: -0.025em; color: #1F2933; max-width: 18ch">Ways to give</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+        <div style="border: 1px solid #ECF0EE; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(26px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; align-items: center; text-align: center">
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">One-off gift</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670; flex: 1">A single contribution towards teaching materials, facilities or supplies in a named school.</span>
+          <span style="font-size: 15px; font-weight: 600; color: #B34E00">Card and mobile money</span>
+        </div>
+        <div style="border: 1px solid #ECF0EE; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(26px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; align-items: center; text-align: center">
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">Monthly giving</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670; flex: 1">A standing contribution that lets us plan a full school year rather than a single visit.</span>
+          <span style="font-size: 15px; font-weight: 600; color: #B34E00">Standing order</span>
+        </div>
+        <div style="border: 1px solid #ECF0EE; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(26px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; align-items: center; text-align: center">
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">In-kind supply</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670; flex: 1">Soap, sanitary products, tanks or taps, delivered through our existing supply chain.</span>
+          <span style="font-size: 15px; font-weight: 600; color: #B34E00">Goods and services</span>
+        </div>
+        <div style="border: 1px solid #ECF0EE; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(26px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; align-items: center; text-align: center">
+          <span style="font-weight: 700; font-size: 21px; line-height: 1.3; color: #1F2933">Corporate partnership</span>
+          <span style="font-size: 16px; line-height: 1.6; color: #5B6670; flex: 1">Fund a school or a district, with impact reporting and visibility for your organisation.</span>
+          <span style="font-size: 15px; font-weight: 600; color: #B34E00">From KES 250,000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #FFF9F4; padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(30px, 4vw, 44px)">
+      <h2 style="margin: 0; font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.1; letter-spacing: -0.025em; color: #1F2933; max-width: 20ch">What a contribution covers</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px">
+        <div style="background: #FFF1E6; border-radius: 26px; padding: 30px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(26px, 2.8vw, 34px); line-height: 1; letter-spacing: -0.03em; color: #1F2933">KES 1,500</span>
+          <span style="font-size: 16px; line-height: 1.55; color: #5B6670">Soap and teaching materials for one classroom session.</span>
+        </div>
+        <div style="background: #FFF1E6; border-radius: 26px; padding: 30px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(26px, 2.8vw, 34px); line-height: 1; letter-spacing: -0.03em; color: #1F2933">KES 7,500</span>
+          <span style="font-size: 16px; line-height: 1.55; color: #5B6670">A term of menstrual health supplies for a group of girls.</span>
+        </div>
+        <div style="background: #FFF1E6; border-radius: 26px; padding: 30px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(26px, 2.8vw, 34px); line-height: 1; letter-spacing: -0.03em; color: #1F2933">KES 25,000</span>
+          <span style="font-size: 16px; line-height: 1.55; color: #5B6670">A handwashing station installed and stocked at a school.</span>
+        </div>
+        <div style="background: #FFF1E6; border-radius: 26px; padding: 30px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
+          <span style="font-weight: 800; font-size: clamp(26px, 2.8vw, 34px); line-height: 1; letter-spacing: -0.03em; color: #1F2933">KES 100,000</span>
+          <span style="font-size: 16px; line-height: 1.55; color: #5B6670">A full school programme: facilities, teaching and follow-up.</span>
+        </div>
+      </div>
+      <span style="font-size: 15px; line-height: 1.6; color: #5B6670; max-width: 60ch">Indicative figures, to be confirmed against current supply costs before publication.</span>
+    </div>
+  </section>
+
+  <section style="padding: clamp(66px, 9vw, 126px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(32px, 5vw, 64px); align-items: start">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <h2 style="margin: 0; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.12; letter-spacing: -0.025em; color: #1F2933">Give today</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #5B6670; max-width: 46ch">Online payment is being set up. In the meantime, write to us and we will send account details, a receipt and a note on where your contribution goes.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px">
+          <a href="mailto:hello@vorainternational.com?subject=Supporting%20Vora%20Foundation" style="background: #B34E00; color: #FFFFFF; font-weight: 600; font-size: 17px; padding: 16px 28px; border-radius: 10px; display: block" style-hover="background: #8F3E00; color: #FFFFFF">Email the Foundation</a>
+          <a href="{{ whatsappUrl }}" style="border: 1px solid #DDE4E1; color: #1F2933; font-weight: 600; font-size: 17px; padding: 15px 27px; border-radius: 10px; display: block" style-hover="border-color: #1F2933; color: #1F2933">Message on WhatsApp</a>
+        </div>
+      </div>
+      <div style="border: 1px solid #ECF0EE; border-radius: 26px; box-shadow: 0 2px 4px rgba(18,48,36,0.05), 0 26px 50px -22px rgba(18,48,36,0.28); padding: clamp(26px, 3vw, 38px); display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; align-items: center; text-align: center">
+        <span style="font-weight: 700; font-size: 20px; color: #1F2933">Payment details</span>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid #EDF1EF; padding-bottom: 12px"><span style="font-size: 15px; color: #5B6670">Mobile money</span><span style="font-size: 17px; font-weight: 600; color: #1F2933">To be configured</span></div>
+          <div style="display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid #EDF1EF; padding-bottom: 12px"><span style="font-size: 15px; color: #5B6670">Bank transfer</span><span style="font-size: 17px; font-weight: 600; color: #1F2933">To be configured</span></div>
+          <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 15px; color: #5B6670">Card payment</span><span style="font-size: 17px; font-weight: 600; color: #1F2933">To be configured</span></div>
+        </div>
+        <span style="font-size: 15px; line-height: 1.6; color: #5B6670">Send us your payment provider details and we will wire this page up to accept live contributions.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background: #A34600; padding: clamp(56px, 8vw, 104px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: end">
+      <h2 style="margin: 0; font-weight: 800; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.02; letter-spacing: -0.035em; color: #FFFFFF; max-width: 16ch; text-wrap: balance">Every institution deserves water it can trust.</h2>
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <p style="margin: 0; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; color: rgba(255,255,255,0.86)">We assess your water, sanitation and hygiene facilities and give you a written plan with costs and priorities. There is no charge for the first visit.</p>
+        <a href="Contact.dc.html" style="background: #FFFFFF; color: #A34600; font-weight: 700; font-size: 17px; padding: 17px 30px; border-radius: 10px; display: inline-block; width: fit-content" style-hover="background: #E9F8F1; color: #A34600">Book an assessment</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #FFFFFF; position: relative; overflow: hidden">
+    <div style="position: relative; height: clamp(90px, 14vw, 190px); display: flex; align-items: flex-end; justify-content: center; overflow: hidden">
+      <span style="font-weight: 800; font-size: clamp(120px, 26vw, 360px); line-height: 0.78; letter-spacing: -0.05em; color: #F1F4F3; white-space: nowrap; display: block; user-select: none">VORA</span>
+    </div>
+    <div style="border-top: 1px solid #EBEFED; max-width: 1240px; margin: 0 auto; padding: clamp(40px, 5vw, 62px) clamp(20px, 4vw, 48px) 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 40px">
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-weight: 900; font-size: 17px; letter-spacing: 0.01em; color: #1F2933">Company</span>
+          <a href="About.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">About</a>
+          <a href="About.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Our mission</a>
+          <a href="About.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">How we work</a>
+          <a href="About.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Our team</a>
+          <a href="#contact" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Contact</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-weight: 900; font-size: 17px; letter-spacing: 0.01em; color: #1F2933">Products</span>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Water</a>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Sanitation</a>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Hygiene</a>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Branded products</a>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Services</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-weight: 900; font-size: 17px; letter-spacing: 0.01em; color: #1F2933">Foundation</span>
+          <a href="Foundation.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Our programmes</a>
+          <a href="Foundation.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Hygiene and sanitation education</a>
+          <a href="Foundation.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">School clubs</a>
+          <a href="Foundation.dc.html#support" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Support us</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-weight: 900; font-size: 17px; letter-spacing: 0.01em; color: #1F2933">Resources</span>
+          <a href="Products.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Facility assessments</a>
+          <a href="About.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Certification</a>
+          <a href="Foundation.dc.html" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Impact reports</a>
+          <a href="#contact" style="font-size: 16px; line-height: 1.45; color: #5B6670" style-hover="color: #0E6B42">Press</a>
+        </div>
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span style="font-weight: 900; font-size: 17px; color: #1F2933">Get in touch</span>
+          <a href="mailto:hello@vorainternational.com" style="font-size: 16px; color: #5B6670" style-hover="color: #0E6B42">hello@vorainternational.com</a>
+          <a href="{{ whatsappUrl }}" style="font-size: 16px; color: #5B6670" style-hover="color: #0E6B42">WhatsApp</a>
+          <span style="font-size: 16px; line-height: 1.5; color: #5B6670">Nairobi, Kenya</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span style="font-weight: 900; font-size: 17px; color: #1F2933">Follow us</span>
+          <div style="display: flex; gap: 10px">
+          <a href="#contact" aria-label="Vora on X" style="width: 40px; height: 40px; border-radius: 50%; background: #1F2933; display: flex; align-items: center; justify-content: center" style-hover="background: #0E6B42"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 17px; height: 17px; fill: #FFFFFF; display: block"><path d="M17.5 3h3l-6.6 7.5L21.7 21h-5.9l-4.3-5.6L6.5 21H3.4l7-8-7-10h6l3.9 5.2ZM16.4 19.2h1.7L8.1 4.7H6.3l10.1 14.5Z"/></svg></a>
+          <a href="#contact" aria-label="Vora on LinkedIn" style="width: 40px; height: 40px; border-radius: 50%; background: #1F2933; display: flex; align-items: center; justify-content: center" style-hover="background: #0E6B42"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 17px; height: 17px; fill: #FFFFFF; display: block"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.3V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg></a>
+          <a href="#contact" aria-label="Vora on Instagram" style="width: 40px; height: 40px; border-radius: 50%; background: #1F2933; display: flex; align-items: center; justify-content: center" style-hover="background: #0E6B42"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 17px; height: 17px; fill: #FFFFFF; display: block"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.25.07 1.62.07 4.8s0 3.55-.07 4.8c-.05 1.17-.25 1.8-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.37-2.23.42-1.25.06-1.62.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.42a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.17-.42-.37-1.06-.42-2.23C2.21 15.55 2.2 15.18 2.2 12s0-3.55.07-4.8c.05-1.17.25-1.8.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.45 2.21 8.82 2.2 12 2.2Zm0 1.8c-3.13 0-3.5.01-4.73.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71C3.43 8.5 3.42 8.87 3.42 12s.01 3.5.07 4.73c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.23.06 1.6.07 4.73.07s3.5-.01 4.73-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.23.07-1.6.07-4.73s-.01-3.5-.07-4.73c-.04-.9-.19-1.39-.32-1.71a2.9 2.9 0 0 0-.69-1.06 2.9 2.9 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32C15.5 4.01 15.13 4 12 4Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.05-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg></a>
+          <a href="#contact" aria-label="Vora on Facebook" style="width: 40px; height: 40px; border-radius: 50%; background: #1F2933; display: flex; align-items: center; justify-content: center" style-hover="background: #0E6B42"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 17px; height: 17px; fill: #FFFFFF; display: block"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width: 1240px; margin: 0 auto; padding: clamp(32px, 4vw, 48px) clamp(20px, 4vw, 48px) 30px">
+      <div style="border-top: 1px solid #EBEFED; padding-top: 24px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; justify-content: space-between">
+        <span style="font-size: 15px; color: #5B6670">© 2026 Vora International Limited. All rights reserved.</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px">
+          <a href="#contact" style="font-size: 15px; color: #5B6670" style-hover="color: #0E6B42">Terms of service</a>
+          <a href="#contact" style="font-size: 15px; color: #5B6670" style-hover="color: #0E6B42">Privacy policy</a>
+          <a href="#contact" style="font-size: 15px; color: #5B6670" style-hover="color: #0E6B42">Safeguarding statement</a>
+          <a href="#contact" style="font-size: 15px; color: #5B6670" style-hover="color: #0E6B42">Consent and photography</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;254700000000&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  _onScroll = () => {
+    const el = document.querySelector("[data-header]");
+    if (!el) return;
+    const show = window.scrollY > Math.min(window.innerHeight * 0.62, 560);
+    el.style.transform = show ? "translateY(0)" : "translateY(-130%)";
+    el.style.opacity = show ? "1" : "0";
+    el.style.pointerEvents = show ? "auto" : "none";
+  };
+  componentWillUnmount() { window.removeEventListener("scroll", this._onScroll); }
+  state = { menuOpen: false };
+  componentDidMount() {
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  renderVals() {
+    const num = (this.props.whatsappNumber ?? '254700000000').replace(/[^0-9]/g, '');
+    return {
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      whatsappUrl: 'https://wa.me/' + num
+    };
+  }
+}
+</script>
+</body>
+</html>
