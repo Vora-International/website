@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0E1A16" />
+        <stop offset="100%" stop-color="#145C43" />
+      </linearGradient>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="800" fill="url(#grad)" />
+    <rect width="1200" height="800" fill="url(#grid)" />
+    
+    <!-- Abstract shapes -->
+    <circle cx="950" cy="200" r="350" fill="#145C43" opacity="0.15" />
+    <circle cx="100" cy="700" r="250" fill="#22B573" opacity="0.1" />
+    
+    <!-- Decorative graphic lines -->
+    <path d="M0,600 Q300,500 600,650 T1200,550" fill="none" stroke="#145C43" stroke-width="2" opacity="0.3" />
+    <path d="M0,640 Q300,540 600,690 T1200,590" fill="none" stroke="#22B573" stroke-width="1.5" opacity="0.2" />
+
+    <!-- Content Center / Overlay -->
+    <g transform="translate(100, 480)">
+      <rect x="-20" y="-80" width="750" height="240" rx="8" fill="#0E1A16" fill-opacity="0.75" />
+      <text x="20" y="-20" font-family="'Playfair Display', Georgia, serif" font-size="44" font-weight="600" fill="#FFFFFF">Scheduled Fixed-Day Resupply</text>
+      <text x="20" y="30" font-family="Inter, sans-serif" font-size="20" font-weight="400" fill="#E3E1D9">Reliable logistics delivering essential supplies across Kenya</text>
+      <text x="20" y="80" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#22B573" letter-spacing="2">VORA INTERNATIONAL LIMITED • NAIROBI, KENYA</text>
+    </g>
+  </svg>
